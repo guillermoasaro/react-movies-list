@@ -1,0 +1,73 @@
+{
+  "login": [
+    {
+      "id":"123user1@test.com",
+      "success": true,
+      "message": "OK",
+      "user": {
+        "id": 1,
+        "name": "Guillermo"
+      }
+    },
+    {
+      "id":"321user2@test.com",
+      "success": true,
+      "message": "OK",
+      "user": {
+        "id": 2,
+        "name": "David"
+      }
+    }
+  ],
+  "errors": [
+    {
+      "id": 404,
+      "success": false,
+      "message": "Incorrect user / password combination"
+    }
+  ],
+  "movies_server": [
+    {
+      "id": 1,
+      "title": "The Gift",
+      "year": "2000",
+      "description": "A woman with extrasensory perception is asked to help find a young woman who has disappeared.",
+      "image_url": "https://m.media-amazon.com/images/M/MV5BNTUzMDY3ZDAtY2RiNC00ZGM4LWJjNmMtNWU0MGVjOWVkNjcwXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg"
+    },
+    {
+      "id": 2,
+      "title": "The Merchant of Venice",
+      "year": "2004",
+      "description": "In 16th century Venice, when a merchant must default on a large loan from an abused Jewish moneylender for a friend with romantic ambitions, the bitterly vengeful creditor demands a gruesome payment instead.",
+      "image_url": "https://m.media-amazon.com/images/M/MV5BMGJiNGUxZGYtM2U2YS00ZjJlLThlNjQtYTVkNWUxZGRmYTk4XkEyXkFqcGdeQXVyMTMxMTY0OTQ@._V1_.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Donnie Darko",
+      "year": "2001",
+      "description": "A troubled teenager is plagued by visions of a man in a large rabbit suit who manipulates him to commit a series of crimes, after he narrowly escapes a bizarre accident.",
+      "image_url": "https://m.media-amazon.com/images/M/MV5BZjZlZDlkYTktMmU1My00ZDBiLWFlNjEtYTBhNjVhOTM4ZjJjXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Rope",
+      "year": "1948",
+      "description": "Two men attempt to prove they committed the perfect crime by hosting a dinner party after strangling their former classmate to death.",
+      "image_url": "https://m.media-amazon.com/images/M/MV5BYWFjMDNlYzItY2VlMS00ZTRkLWJjYTEtYjI5NmFlMGE3MzQ2XkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SY1000_CR0,0,645,1000_AL_.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Chinatown",
+      "year": "1974",
+      "description": "A private detective hired to expose an adulterer finds himself caught up in a web of deceit, corruption, and murder.",
+      "image_url": "https://m.media-amazon.com/images/M/MV5BOGMwYmY5ZmEtMzY1Yi00OWJiLTk1Y2MtMzI2MjBhYmZkNTQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX669_CR0,0,669,999_AL_.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Lost in Translation",
+      "year": "2003",
+      "description": "A faded movie star and a neglected young woman form an unlikely bond after crossing paths in Tokyo.",
+      "image_url": "https://m.media-amazon.com/images/M/MV5BMTI2NDI5ODk4N15BMl5BanBnXkFtZTYwMTI3NTE3._V1_.jpg"
+    }
+  ]
+}

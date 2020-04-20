@@ -1,0 +1,7 @@
+{
+  "/login?user=user1@test.com&password=123": "/login/123user1@test.com",
+  "/login?user=user2@test.com&password=321": "/login/321user2@test.com",
+  "/login?user=:email&password=:pass": "/errors/404",
+  "/movies_server?user_id=1": "/movies_server?year_lte=2000",
+  "/movies_server?user_id=2": "/movies_server?year_gte=2001"
+}

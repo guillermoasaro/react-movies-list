@@ -1,8 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Movies List
+
+Test `v16.13.1` [React](https://github.com/facebook/react/) applications using functional components and hooks to be able to maintain state and allow to generate side-effects.
+
+In short it consists of a login page, a list of movies and a detail view for the movies. See the [components](#Components) section for more information of the components and its functions.
+
+## Built with
+
+  - [React Router](https://github.com/ReactTraining/react-router) for basic and nested routing.
+  - [React-Bootstrap](https://github.com/react-bootstrap/react-bootstrap) to have CSS stylized React components.
+  - [JavaScript Cookie](https://github.com/js-cookie/js-cookie) to store the user session in a browser cookie.
+  - It consumes a test API provided by a local [JSON Server](https://github.com/typicode/json-server).
+  - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Run with
+
+  - `git clone`
+  - `yarn install`
+  - `yarn dev`
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `yarn dev`
+
+It uses [concurrently](https://github.com/kimmobrunfeldt/concurrently) to run the app and the Mock API in one single command.<br />
+
+Equivalent to `yarn start & yarn json-server` but better.
 
 ### `yarn start`
 
@@ -11,6 +35,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+### `yarn json-server`
+
+Runs [json-server](https://github.com/typicode/json-server) Mock API in the port `3001`.<br />
+
+It reads its configuration from `routes.json` and the data from `db.json`.
 
 ### `yarn test`
 
@@ -27,42 +57,76 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Components
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### App
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Create routing separated between a private area (`Dashboard`) and public page (`Login`).
+- State:
+  - Maintains the user's session in its state using the React `useState` hook.
+  - Has `signIn` and `signOut` methods that update the state of the component.
+- Cookies:
+  - It is responsible for setting the session in cookies using the `SessionHelper` helper.
+  - It is in charge of keeping the cookie updated with each change of its state, using the react `useEffect` hook.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Login
 
-## Learn More
+- Responsible for displaying the login form
+- Receive `signIn` function in props from `Dashboard`
+- Process the form when submitted by the user
+  - Fetch the API request for authentication
+  - Handle errors
+  - Calls the function `signinIn` received in props
+    - Passing user data and
+    - Redirect to the page it came from using `useLocation` and `useHistory` from React Router
+  - If the user was already authenticated, it redirects to the dashboard using `Redirect` from React Router
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Dashboard
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Represents panel for authenticated users.
+- Get movies from the API  when the component done mounting by using the React `useEffect` hook and a array `[]` literal.
+  - Creates its state as an array of movies using the React hook `useState`.
+  - In case a blank response shows and `Alert` component.
+- Creates a nested routing for the private views of the movie list and the detail view using Route and `useRouteMatch` to set the path.
+- Integrate `Navigation` bar with other views.
+  - Pass movies by props to `MoviesList` and `MovieDetail`.
+  - Pass login function to the `Login` component.
 
-### Code Splitting
+### Navigation
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- Shows the `Navbar` keeping the current user name visible.
+  - Use `SessionHelper` to get the cookie.
+- Show logout button.
+  - Receives a signout function for props from the `Dashboard`.
+  - Passed as function parameter, a function to redirect to login using `useHistory` from React Router.
 
-### Analyzing the Bundle Size
+### MoviesList
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- Shows the list of movies of the current user.
+  - Receives the movie array in its props from the `Dashboard` component.
+  - For each element of the array load a the movie data in the `Card`, `Row` and `Col` components from React-Bootstrap.
+  - Use `Link` and `useRouteMatch` from React Router to generate a link to the detail path of a movie.
 
-### Making a Progressive Web App
+### MovieDetail
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- Search the selected movie in the movies array.
+  - Get the ID of the movie from the url parameter using `useParams` function of React Router.
+  - Filters the movies array received in props from the `MoviesList` component.
+  - Get the movie object.
+- Shows the detail of a movie.
+  - Loads two React-Bootstrap `Card` elements, one with the image and the other with the title, description and year.
+  - Allows going back using the `useHistory` function of React Router and a `Button` from React-Bootstrap.
 
-### Advanced Configuration
+# Helper Components
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### PrivateRoute
+- Wrapper of an React Router `Route`.
+- Redirects to login when an unauthenticated user tries to access one of the child components.
+  - Use `Redirect` from React Router for redirection to login.
+- Get the session cookie using the `isAuthenticated` method of the `SessionHelper` helper.
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### SessionHelper
+- Set of functions to manage user session using browser cookies.
+  - `getCookieSession`, `setCookieSession`, `isAuthenticated` and for a quick ckeck.
+- It uses the `js-cookie` library.

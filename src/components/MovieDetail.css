@@ -1,0 +1,11 @@
+.bg-gray {
+  background-color: #121212 !important;
+}
+
+.MovieDetail{
+  min-height: 500px;
+}
+
+.DetailFooter{
+  padding: .75rem 1.25rem;
+}
