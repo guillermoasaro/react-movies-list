@@ -1,8 +1,8 @@
 # React Movies List
 
-Test `v16.13.1` [React](https://github.com/facebook/react/) applications using functional components and hooks to be able to maintain state and allow to generate side-effects.
+Test `v16.13.1` [React](https://github.com/facebook/react/) applications using functional components and hooks to be able to maintain state and allow generating side effects.
 
-In short it consists of a login page, a list of movies and a detail view for the movies. See the [components](#Components) section for more information of the components and its functions.
+In short, it consists of a login page, a list of movies and a detail view for the movies. See the [components](#Components) section for more information of the components and its functions.
 
 ## Built with
 
@@ -73,11 +73,11 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### Login
 
 - Responsible for displaying the login form
-- Receive `signIn` function in props from `Dashboard`
+- Receive `signIn` function in props from `App` component.
 - Process the form when submitted by the user
   - Fetch the API request for authentication
   - Handle errors
-  - Calls the function `signinIn` received in props
+  - Calls the function `signIn` received in props
     - Passing user data and
     - Redirect to the page it came from using `useLocation` and `useHistory` from React Router
   - If the user was already authenticated, it redirects to the dashboard using `Redirect` from React Router
@@ -85,13 +85,13 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### Dashboard
 
 - Represents panel for authenticated users.
+- Receive `signOut` function in props from `App` component.
 - Get movies from the API  when the component done mounting by using the React `useEffect` hook and a array `[]` literal.
   - Creates its state as an array of movies using the React hook `useState`.
   - In case a blank response shows and `Alert` component.
 - Creates a nested routing for the private views of the movie list and the detail view using Route and `useRouteMatch` to set the path.
 - Integrate `Navigation` bar with other views.
   - Pass movies by props to `MoviesList` and `MovieDetail`.
-  - Pass login function to the `Login` component.
 
 ### Navigation
 
